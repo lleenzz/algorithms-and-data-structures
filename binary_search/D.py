@@ -9,7 +9,7 @@ def binary_search():
             l = m
         else:
             r = m
-    return m
+    return l
 
 
 
