@@ -29,6 +29,7 @@ class MaxHeap:
             if self.heap[i] < self.heap[j]:
                 self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
             i = j
+
     def indMaxChild(self, i):
         if i * 2 + 1 > self.size:
             return i * 2

@@ -1,4 +1,4 @@
-class MaxHeap:
+class MinHeap:
     def __init__(self):
         self.heap = [0]
         self.size = 0
@@ -9,11 +9,11 @@ class MaxHeap:
         self.shiftUp(self.size)
 
     def shiftUp(self, i):
-        while i // 2 > 0 and self.heap[i] > self.heap[i // 2]:
+        while i // 2 > 0 and self.heap[i] < self.heap[i // 2]:
             self.heap[i // 2], self.heap[i] = self.heap[i], self.heap[i // 2]
             i //= 2
 
-    def extractMax(self):
+    def extractMin(self):
         if self.size == 0:
             return None
         removed = self.heap[1]
@@ -25,21 +25,22 @@ class MaxHeap:
 
     def shiftDown(self, i):
         while i * 2 <= self.size:
-            j = self.indMaxChild(i)
-            if self.heap[i] < self.heap[j]:
+            j = self.indMinChild(i)
+            if self.heap[i] > self.heap[j]:
                 self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
             i = j
-    def indMaxChild(self, i):
+
+    def indMinChild(self, i):
         if i * 2 + 1 > self.size:
             return i * 2
-        if self.heap[i * 2] < self.heap[i * 2 + 1]:
+        if self.heap[i * 2] > self.heap[i * 2 + 1]:
             return i * 2 + 1
         return i * 2
 
 
 n = int(input())
 arr = list(map(int, input().split()))
-heap = MaxHeap()
+heap = MinHeap()
 
 for x in arr:
     heap.insert(x)
@@ -47,8 +48,6 @@ for x in arr:
 sorted_arr = []
 
 for _ in range(n):
-    sorted_arr.append(heap.extractMax())
+    sorted_arr.append(heap.extractMin())
 
-sorted_arr.reverse()
 print(*sorted_arr)
-
